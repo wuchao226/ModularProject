@@ -1,0 +1,44 @@
+plugins {
+  id 'com.android.library'
+}
+// 定义变量
+def app_android = this.rootProject.ext.androidID
+android {
+  compileSdkVersion app_android.compileSdkVersion
+  buildToolsVersion app_android.buildToolsVersion
+
+  defaultConfig {
+    minSdkVersion app_android.minSdkVersion
+    targetSdkVersion app_android.targetSdkVersion
+
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    consumerProguardFiles "consumer-rules.pro"
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    }
+  }
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+}
+
+dependencies {
+  implementation fileTree(dir: 'libs', include: ['*.jar'])
+  /* implementation 'androidx.appcompat:appcompat:1.2.0'
+   implementation 'com.google.android.material:material:1.2.1'
+   testImplementation 'junit:junit:4.13.1'
+   androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+   androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'*/
+
+
+  dependenciesID.each { k, v -> implementation v }
+
+  // 因为每一个 “子Module”都依赖了 common，所有当我们在 common中依赖 arouter_api（柱状）
+  // 就等于 全部都依赖了 arouter_api
+  api project(":arouter_api")
+}

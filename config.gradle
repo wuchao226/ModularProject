@@ -1,0 +1,49 @@
+// Groovy语言 面向对象 if  for
+
+// 把一些公用的，共用的，可扩展的，加入到这里面来
+// 整个App项目的Gradle配置文件
+// ext 自定义增加我们的内容
+
+//扩展块
+ext {
+
+  // 开发环境 / 生产环境（测试/正式）
+  isRelease = true
+
+  // 定义一个包名，用于存放APT生成的所有类文件
+  packageNameForAPT = "com.wuc.moduleproject";
+
+  // 建立Map存储，对象名、key都可以自定义，groovy糖果语法，非常灵活
+  androidID = [compileSdkVersion: 30,
+               buildToolsVersion: "30.0.2",
+
+               applicationId    : "com.wuc.moduleproject",
+               minSdkVersion    : 21,
+               targetSdkVersion : 30,
+               versionCode      : 1,
+               versionName      : "1.0"]
+
+  appId = ["app"     : "com.wuc.moduleproject",
+           "order"   : "com.wuc.order",
+           "personal": "com.wuc.personal"]
+
+  //  测试环境，正式环境 URL
+  url = ["debug"  : "https://11.22.33.44/debug",
+         "release": "https://11.22.33.44/release"]
+
+  // 依赖相关的
+  dependenciesID = ["appcompat"       : "androidx.appcompat:appcompat:1.2.0",
+                    "constraintlayout": "androidx.constraintlayout:constraintlayout:2.0.4",
+                    "material"        : "com.google.android.material:material:1.2.1",
+                    "vectordrawable"  : "androidx.vectordrawable:vectordrawable:1.1.0",
+                    "fragment"        : "androidx.navigation:navigation-fragment:2.2.2",
+                    "ui"              : "androidx.navigation:navigation-ui:2.2.2",
+                    "extensions"      : "androidx.lifecycle:lifecycle-extensions:2.2.0",
+                    "okhttp3"         : "com.squareup.okhttp3:okhttp:3.10.0",
+                    "retrofit"        : "com.squareup.retrofit2:retrofit:2.5.0",
+                    "fastjson"        : "com.alibaba:fastjson:1.2.58",
+                    /* "junit"           : "junit:junit:junit:junit:4.13.1",
+                     "runner"          : "androidx.test:runner:1.2.0",
+                     "testjunit"       : "androidx.test.ext:junit:1.1.2",
+                     "espresso"        : "androidx.test.espresso:espresso-core:3.3.0"*/]
+}
