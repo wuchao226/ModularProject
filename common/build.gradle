@@ -1,11 +1,8 @@
 plugins {
   id 'com.android.library'
 }
-// 定义变量
-def app_android = this.rootProject.ext.androidID
 android {
   compileSdkVersion app_android.compileSdkVersion
-  buildToolsVersion app_android.buildToolsVersion
 
   defaultConfig {
     minSdkVersion app_android.minSdkVersion
@@ -25,6 +22,7 @@ android {
     sourceCompatibility JavaVersion.VERSION_1_8
     targetCompatibility JavaVersion.VERSION_1_8
   }
+  namespace 'com.wuc.common'
 }
 
 dependencies {
@@ -36,7 +34,7 @@ dependencies {
    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'*/
 
 
-  dependenciesID.each { k, v -> implementation v }
+  app_dependencies.each { k, v -> implementation v }
 
   // 因为每一个 “子Module”都依赖了 common，所有当我们在 common中依赖 arouter_api（柱状）
   // 就等于 全部都依赖了 arouter_api

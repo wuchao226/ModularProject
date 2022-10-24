@@ -5,19 +5,16 @@ if (isRelease) {
   apply plugin: 'com.android.application'
 }
 
-// 定义变量
-def app_android = this.rootProject.ext.androidID
 android {
 
   compileSdkVersion app_android.compileSdkVersion
-  buildToolsVersion app_android.buildToolsVersion
 
   defaultConfig {
     // 如果是集成化模式，不能有applicationId
     if (!isRelease) {
       // 组件化模式能独立运行才能有applicationId
       //      applicationId "com.wuc.order"
-      applicationId appId.order
+      applicationId app_appid.order
     }
     minSdkVersion app_android.minSdkVersion
     targetSdkVersion app_android.targetSdkVersion
@@ -71,6 +68,7 @@ android {
       }
     }
   }
+  namespace 'com.wuc.order'
 }
 
 dependencies {
@@ -82,7 +80,7 @@ dependencies {
    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'*/
 
-  dependenciesID.each { k, v -> implementation v }
+  app_dependencies.each { k, v -> implementation v }
 
   // 公共基础库
   implementation project(":common")
